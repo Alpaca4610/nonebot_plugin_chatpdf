@@ -16,14 +16,6 @@ try:
 except:
     api_key = ""
 
-try:
-    http_proxy = nonebot.get_driver().config.openai_http_proxy
-except:
-    http_proxy = ""
-
-if http_proxy != "":
-    os.environ["http_proxy"] = http_proxy
-    os.environ["https_proxy"] = http_proxy
 
 data = {}
 
@@ -107,7 +99,8 @@ async def _(event: MessageEvent, msg: Message = CommandArg()):
     loop = asyncio.get_event_loop()
 
     try:
-        ans = await loop.run_in_executor(None, get_ans, event.get_session_id(), question)
+        ans = await get_ans(event.get_session_id(), question)
+        
     except Exception as error:
         await stop_request.finish(str(error))
     await stop_request.finish(MessageSegment.text(ans), at_sender=True)

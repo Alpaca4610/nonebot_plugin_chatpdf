@@ -11,6 +11,15 @@ try:
 except:
     api_key = ""
 
+try:
+    http_proxy = nonebot.get_driver().config.openai_http_proxy
+except:
+    http_proxy = ""
+
+if http_proxy != "":
+     openai.proxy = {'http': http_proxy, 'https': http_proxy}
+    
+
 openai.api_key = api_key
 
 COMPLETIONS_MODEL = "gpt-3.5-turbo"
@@ -89,7 +98,7 @@ def order_document_sections_by_query_similarity(query: str, embeddings, event_id
     return document_similarities
 
 
-def ask(question: str, embeddings, sources, event_id):
+async def ask(question: str, embeddings, sources, event_id):
     ordered_candidates = order_document_sections_by_query_similarity(question, embeddings, event_id)
     ctx = ""
     for candi in ordered_candidates:
@@ -107,18 +116,18 @@ def ask(question: str, embeddings, sources, event_id):
                                             u"答案："
     ])
 
-    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
+    completion = await openai.ChatCompletion.acreate(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
     return [prompt, completion.choices[0].message.content]
 
 
-def get_ans(event_id: str, question: str):
+async def get_ans(event_id: str, question: str):
     folder = Path() / "data" / "nonebot-plugin-chatpdf" / "result" / event_id
 
     tmppath = os.path.join(folder, 'result.json')
     if os.path.isfile(tmppath):
         with open(tmppath, 'r', encoding='UTF-8') as f:
             obj = json.load(f)
-            [prompt, answer] = ask(question, obj["embeddings"], obj["sources"], event_id)
+            [prompt, answer] = await ask(question, obj["embeddings"], obj["sources"], event_id)
 
         return answer
 
