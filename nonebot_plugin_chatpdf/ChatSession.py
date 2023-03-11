@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os.path
+import time
 import urllib
 from pathlib import Path
 
@@ -17,6 +18,12 @@ try:
     http_proxy = nonebot.get_driver().config.openai_http_proxy
 except:
     http_proxy = ""
+
+try:
+    time_limit = nonebot.get_driver().config.openai_api_limit
+except:
+    time_limit = "True"
+
 
 if http_proxy != "":
     openai.proxy = {'http': http_proxy, 'https': http_proxy}
@@ -35,7 +42,10 @@ def get_embedding(text: str, event_id: str, model: str = EMBEDDING_MODEL):
     if os.path.isfile(tmpfile):
         with open(tmpfile, 'r', encoding='UTF-8') as f:
             return json.load(f)
-
+    
+    if time_limit == "True" :
+        time.sleep(1)
+    
     result = openai.Embedding.create(
         model=model,
         input=text

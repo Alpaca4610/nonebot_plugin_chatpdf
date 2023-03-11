@@ -46,6 +46,7 @@ OPENAI_API_KEY = key
 
 ```
 OPENAI_HTTP_PROXY = "http://127.0.0.1:8001"    # 设置代理解决OPENAI的网络问题
+OPENAI_API_LIMIT = True     # 降低生成embedding时向OpenAI发送请求的频率，提高embedding生成的成功率。默认开启，改为False关闭。免费版API建议开启。
 ```
 
 # 使用方法
