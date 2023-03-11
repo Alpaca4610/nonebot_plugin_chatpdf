@@ -1,10 +1,12 @@
-import numpy as np
-import openai
+import hashlib
 import json
 import os.path
-import hashlib
-import nonebot
+import urllib
 from pathlib import Path
+
+import nonebot
+import numpy as np
+import openai
 
 try:
     api_key = nonebot.get_driver().config.openai_api_key
@@ -17,8 +19,7 @@ except:
     http_proxy = ""
 
 if http_proxy != "":
-     openai.proxy = {'http': http_proxy, 'https': http_proxy}
-    
+    openai.proxy = {'http': http_proxy, 'https': http_proxy}
 
 openai.api_key = api_key
 
@@ -27,7 +28,7 @@ EMBEDDING_MODEL = "text-embedding-ada-002"
 CONTEXT_TOKEN_LIMIT = 3500
 
 
-def get_embedding(text: str, event_id: str, model: str = EMBEDDING_MODEL):
+def get_embedding(text: str, event_id: str, model: str = EMBEDDING_MODEL) -> list[float]:
     folder = Path() / "data" / "nonebot-plugin-chatpdf" / "embedding" / event_id
     Path(folder).mkdir(parents=True, exist_ok=True)
     tmpfile = os.path.join(folder, hashlib.md5(text.encode('utf-8')).hexdigest() + ".json")
@@ -46,20 +47,16 @@ def get_embedding(text: str, event_id: str, model: str = EMBEDDING_MODEL):
     return result["data"][0]["embedding"]
 
 
-def file2embedding(event_id: str, contents=""):
+def file2embedding(event_id: str, url):
     embeddings = []
     sources = []
-    content = contents
-
-    Path().mkdir(parents=True, exist_ok=True)
 
     folder = Path() / "data" / "nonebot-plugin-chatpdf" / "result" / event_id
     Path(folder).mkdir(parents=True, exist_ok=True)
 
-    #   if content == "":
-    #     with open(folder+'/source.txt', 'r', encoding='UTF-8') as handle1:
-    #       content = handle1.read()
-
+    with urllib.request.urlopen(url) as response:
+        content = response.read().decode()
+        # print(content)
     for source in content.split('\n'):
         if source.strip() == '':
             continue
@@ -72,20 +69,39 @@ def file2embedding(event_id: str, contents=""):
         json.dump({"sources": sources, "embeddings": embeddings}, handle2, ensure_ascii=False, indent=4)
 
 
-def vector_similarity(x, y):
+def text2embedding(event_id: str, contents=""):
+    embeddings = []
+    sources = []
+    content = contents
+
+    folder = Path() / "data" / "nonebot-plugin-chatpdf" / "result" / event_id
+    Path(folder).mkdir(parents=True, exist_ok=True)
+    for source in content.split('\n'):
+        if source.strip() == '':
+            continue
+        embeddings.append(get_embedding(source, event_id))
+        sources.append(source)
+
+    tmppath = os.path.join(folder, 'result.json')
+
+    with open(tmppath, 'w', encoding='utf-8') as handle2:
+        json.dump({"sources": sources, "embeddings": embeddings}, handle2, ensure_ascii=False, indent=4)
+
+
+def vector_similarity(x: list[float], y: list[float]) -> float:
     """
     Returns the similarity between two vectors.
-
+    
     Because OpenAI Embeddings are normalized to length 1, the cosine similarity is the same as the dot product.
     """
     return np.dot(np.array(x), np.array(y))
 
 
-def order_document_sections_by_query_similarity(query: str, embeddings, event_id):
+def order_document_sections_by_query_similarity(query: str, embeddings, event_id) -> list[(float, (str, str))]:
     """
     Find the query embedding for the supplied query, and compare it against all of the pre-calculated document embeddings
-    to find the most relevant sections.
-
+    to find the most relevant sections. 
+    
     Return the list of document sections, sorted by relevance in descending order.
     """
     query_embedding = get_embedding(query, event_id)
@@ -116,7 +132,8 @@ async def ask(question: str, embeddings, sources, event_id):
                                             u"答案："
     ])
 
-    completion = await openai.ChatCompletion.acreate(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
+    completion = await openai.ChatCompletion.acreate(model="gpt-3.5-turbo",
+                                                     messages=[{"role": "user", "content": prompt}])
     return [prompt, completion.choices[0].message.content]
 
 

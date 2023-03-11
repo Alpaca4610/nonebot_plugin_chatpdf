@@ -1,21 +1,21 @@
-from pathlib import Path
-import shutil
-import nonebot
-import os
 import asyncio
+import os
+import shutil
+from datetime import timedelta
+from pathlib import Path
 
-from nonebot import on_command
-from nonebot.params import CommandArg
+import nonebot
+from nonebot import on_command, on_notice
 from nonebot.adapters.onebot.v11 import (Message, MessageSegment)
-from nonebot.adapters.onebot.v11 import MessageEvent
+from nonebot.adapters.onebot.v11 import MessageEvent, Bot, GroupMessageEvent, GroupUploadNoticeEvent
+from nonebot.params import CommandArg
 
-from .ChatSession import file2embedding, get_ans
+from .ChatSession import file2embedding, get_ans, text2embedding
 
 try:
     api_key = nonebot.get_driver().config.openai_api_key
 except:
     api_key = ""
-
 
 data = {}
 
@@ -80,7 +80,7 @@ async def _(event: MessageEvent, msg: Message = CommandArg()):
     stop_request.send(MessageSegment.text("开始分析......"))
     loop = asyncio.get_event_loop()
     try:
-        await loop.run_in_executor(None, file2embedding, event.get_session_id(), data[event.get_session_id()])
+        await loop.run_in_executor(None, text2embedding, event.get_session_id(), data[event.get_session_id()])
     except Exception as error:
         data[event.get_session_id()] = ""
         await stop_request.finish(str(error))
@@ -100,7 +100,7 @@ async def _(event: MessageEvent, msg: Message = CommandArg()):
 
     try:
         ans = await get_ans(event.get_session_id(), question)
-        
+
     except Exception as error:
         await stop_request.finish(str(error))
     await stop_request.finish(MessageSegment.text(ans), at_sender=True)
@@ -116,3 +116,25 @@ async def _(event: MessageEvent, msg: Message = CommandArg()):
     await delete_request.finish(MessageSegment.text("全部删除文件缓存成功！"), at_sender=True)
 
 
+test_request = on_command("/file", block=True, priority=1)
+
+
+@test_request.handle()
+async def test_(bot: Bot, event: GroupMessageEvent, msg: Message = CommandArg()):
+    file_request = on_notice(temp=True, expire_time=timedelta(minutes=1))
+
+    @file_request.handle()
+    async def _(event: GroupUploadNoticeEvent):
+        # logger.info(event.file.url)
+        await file_request.send(MessageSegment.text("分析中，请稍等......"), at_sender=True)
+        loop = asyncio.get_event_loop()
+        try:
+            await loop.run_in_executor(None, file2embedding, event.get_session_id(), event.file.url)
+        except Exception as error:
+            data[event.get_session_id()] = ""
+            await file_request.finish(str(error))
+
+        data[event.get_session_id()] = ""
+        await file_request.finish(MessageSegment.text("文章分析完成！"), at_sender=True)
+
+    await test_request.finish(MessageSegment.text("请上传需要分析的txt文件"), at_sender=True)

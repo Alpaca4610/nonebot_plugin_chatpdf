@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-chatpdf"
-version = "0.1.2"
+version = "0.2.0"
 description = "A nonebot plugin for chatpdf"
 authors = ["Alpaca <alpaca@bupt.edu.cn>"]
 license = "MIT"
