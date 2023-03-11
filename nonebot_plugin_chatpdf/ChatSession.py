@@ -28,7 +28,7 @@ EMBEDDING_MODEL = "text-embedding-ada-002"
 CONTEXT_TOKEN_LIMIT = 3500
 
 
-def get_embedding(text: str, event_id: str, model: str = EMBEDDING_MODEL) -> list[float]:
+def get_embedding(text: str, event_id: str, model: str = EMBEDDING_MODEL):
     folder = Path() / "data" / "nonebot-plugin-chatpdf" / "embedding" / event_id
     Path(folder).mkdir(parents=True, exist_ok=True)
     tmpfile = os.path.join(folder, hashlib.md5(text.encode('utf-8')).hexdigest() + ".json")
@@ -88,7 +88,7 @@ def text2embedding(event_id: str, contents=""):
         json.dump({"sources": sources, "embeddings": embeddings}, handle2, ensure_ascii=False, indent=4)
 
 
-def vector_similarity(x: list[float], y: list[float]) -> float:
+def vector_similarity(x, y):
     """
     Returns the similarity between two vectors.
     
@@ -97,7 +97,7 @@ def vector_similarity(x: list[float], y: list[float]) -> float:
     return np.dot(np.array(x), np.array(y))
 
 
-def order_document_sections_by_query_similarity(query: str, embeddings, event_id) -> list[(float, (str, str))]:
+def order_document_sections_by_query_similarity(query: str, embeddings, event_id):
     """
     Find the query embedding for the supplied query, and compare it against all of the pre-calculated document embeddings
     to find the most relevant sections. 
