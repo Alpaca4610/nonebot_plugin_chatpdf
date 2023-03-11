@@ -44,7 +44,7 @@ def get_embedding(text: str, event_id: str, model: str = EMBEDDING_MODEL):
             return json.load(f)
     
     if time_limit == "True" :
-        time.sleep(1)
+        time.sleep(0.1)
     
     result = openai.Embedding.create(
         model=model,

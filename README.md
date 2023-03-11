@@ -59,6 +59,7 @@ OPENAI_API_LIMIT = True     # 降低生成embedding时向OpenAI发送请求的�
 - 在一分钟内，上传需要分析的txt文件到群文件中，机器人会对其进行分析并使用OpenAI的API生成embedding文件，分析完成后会返回成功信息
 - /chat_pdf (文章分析完成后，使用该命令后面接需要提问的关于文章的问题，机器人会给出答案)
 - /delete_all (删除所有缓存文件)
+- /delete_my （删除用户在本群的缓存文件）
 
 ### 使用方式2：分次发送文本
 
@@ -67,6 +68,7 @@ OPENAI_API_LIMIT = True     # 降低生成embedding时向OpenAI发送请求的�
 - /stop (文章添加完成之后，使用该命令告知机器人，机器人开始分析文章并使用OpenAI的API生成embedding文件)
 - /chat_pdf (文章分析完成后，使用该命令后面接需要提问的关于文章的问题，机器人会给出答案)
 - /delete_all (删除所有缓存文件)
+- /delete_my （删除用户在本群的缓存文件）
 
 # 注意事项
 

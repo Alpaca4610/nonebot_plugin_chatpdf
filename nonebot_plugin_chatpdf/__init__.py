@@ -110,10 +110,18 @@ delete_request = on_command("/delete_all", block=True, priority=1)
 
 
 @delete_request.handle()
-async def _(event: MessageEvent, msg: Message = CommandArg()):
+async def _():
     delete_file(result_folder)
     delete_file(embedding_folder)
     await delete_request.finish(MessageSegment.text("全部删除文件缓存成功！"), at_sender=True)
+
+delete_user_request = on_command("/delete_my", block=True, priority=1)
+
+@delete_user_request.handle()
+async def _(event: MessageEvent):
+    delete_file(os.path.join(result_folder, event.get_session_id()))
+    delete_file(os.path.join(embedding_folder, event.get_session_id()))
+    await delete_user_request.finish(MessageSegment.text("成功删除你在该群的缓存文件！"), at_sender=True)
 
 
 test_request = on_command("/file", block=True, priority=1)
