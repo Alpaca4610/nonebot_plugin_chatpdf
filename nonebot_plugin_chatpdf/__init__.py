@@ -111,7 +111,7 @@ async def _(event: GroupMessageEvent):
             data[id] = session
             summary = session.read_pdf_and_summarize(f)
 
-        await pdf_request.finish(MessageSegment.text(summary + "现在，你可以向我提问有关于改文章的问题了"), at_sender=True)
+        await pdf_request.finish(MessageSegment.text(summary + "\n\n现在，你可以向我提问有关于该文章的问题了"), at_sender=True)
 
     await pdf_request.finish(MessageSegment.text("请上传需要分析的pdf文件"), at_sender=True)
 
@@ -121,6 +121,8 @@ pdf_chat_request = on_command("/chat_pdf", block=True, priority=1)
 
 @pdf_chat_request.handle()
 async def _(bot: Bot, event: GroupMessageEvent, msg: Message = CommandArg()):
+    if event.get_session_id() not in data:
+        await pdf_chat_request.finish(MessageSegment.text("请先使用/start命令开始！"))
     question = msg.extract_plain_text()
     await pdf_request.finish(MessageSegment.text(data[event.get_session_id()].question(question)), at_sender=True)
 
