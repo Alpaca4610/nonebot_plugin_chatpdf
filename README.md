@@ -36,7 +36,7 @@
   ```
 * 使用 pip
   ```
-  pip install nonebot-plugin-chatgpt-chatpdf
+  pip install nonebot-plugin-chatpdf
   ```
 
 # 配置文件
