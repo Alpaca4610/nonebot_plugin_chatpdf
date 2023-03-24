@@ -112,6 +112,19 @@ url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
 reference = "tsinghua"
 
 [[package]]
+name = "faiss-cpu"
+version = "1.7.3"
+description = "A library for efficient similarity search and clustering of dense vectors."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+reference = "tsinghua"
+
+[[package]]
 name = "frozenlist"
 version = "1.3.3"
 description = "A list-like structure which implements collections.abc.MutableSequence"
@@ -301,22 +314,12 @@ url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
 reference = "tsinghua"
 
 [[package]]
-name = "pypdf2"
-version = "3.0.1"
-description = "A pure-python PDF library capable of splitting, merging, cropping, and transforming PDF files"
+name = "pymupdf"
+version = "1.21.1"
+description = "Python bindings for the PDF toolkit and renderer MuPDF"
 category = "main"
 optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-typing_extensions = {version = ">=3.10.0.0", markers = "python_version < \"3.10\""}
-
-[package.extras]
-crypto = ["PyCryptodome"]
-dev = ["black", "flit", "pip-tools", "pre-commit (<2.18.0)", "pytest-cov", "wheel"]
-docs = ["myst_parser", "sphinx", "sphinx_rtd_theme"]
-full = ["Pillow", "PyCryptodome"]
-image = ["Pillow"]
+python-versions = ">=3.7"
 
 [package.source]
 type = "legacy"
@@ -464,7 +467,7 @@ reference = "tsinghua"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "78835f7077a1037dbf7af805205f9a6f73909dab7dbbf2a6675c1581d58285a1"
+content-hash = "4761f5bd56b592b9f72cc3b01a216b8eeaab32ce27aa1a4b30b3661db3437878"
 
 [metadata.files]
 aiohttp = [
@@ -652,6 +655,33 @@ charset-normalizer = [
 colorama = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
+]
+faiss-cpu = [
+    {file = "faiss-cpu-1.7.3.tar.gz", hash = "sha256:cb71fe3f2934732d157d9d8cfb6ed2dd4020a0065571c84842ff6a3f0beab310"},
+    {file = "faiss_cpu-1.7.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:343f025e0846239d987d0c719772387ad685b74e5ef62b2e5616cabef9062729"},
+    {file = "faiss_cpu-1.7.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:8b7b1cf693d7c24b5a633ff024717bd715fec501af4854357da0805b4899bcec"},
+    {file = "faiss_cpu-1.7.3-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1c37e5fc0a266839844798a53dd42dd6afbee0c5905611f3f278297053fccbd7"},
+    {file = "faiss_cpu-1.7.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0628f7b0c6263ef4431995bb4f5f39833f999e96e6663935cbf0a1f2243dc4ac"},
+    {file = "faiss_cpu-1.7.3-cp310-cp310-win_amd64.whl", hash = "sha256:e22d1887c617156a673665c913ee82a30bfc1a3bc939ba8500b61328bce5a625"},
+    {file = "faiss_cpu-1.7.3-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:6d411449a5f3c3abfcafadaac3190ab1ab206023fc9110da86649506dcbe8a27"},
+    {file = "faiss_cpu-1.7.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:a10ea8622908f9f9ca4003e66da809dfad4af5c7d9fb7f582722d703bbc6c8bd"},
+    {file = "faiss_cpu-1.7.3-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7c5ced43ae058a62f63b12194ec9aa4c34066b0ea813ecbd936c65b7d52848c8"},
+    {file = "faiss_cpu-1.7.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3df6371012248dea8e9509949e2d2c6d73dea7c1bdaa4ba4563eb1c3cd8021a6"},
+    {file = "faiss_cpu-1.7.3-cp311-cp311-win_amd64.whl", hash = "sha256:8b6ff7854c3f46104718c6b34e81cd48c156d970dd87703c5122ca90217bb8dc"},
+    {file = "faiss_cpu-1.7.3-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:ab6314a8fbcce11dc3ecb6f48dda8c4ec274ed11c1f336f599f480bf0561442c"},
+    {file = "faiss_cpu-1.7.3-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:877c0bbf4c4a1806d88e091aba4c91ff3fa35c3ede5663b7fafc5b39247a369e"},
+    {file = "faiss_cpu-1.7.3-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f6f199be10d30ecc6ed65350931006eca01b7bb8faa27d63069318eea0f6a0c1"},
+    {file = "faiss_cpu-1.7.3-cp37-cp37m-win_amd64.whl", hash = "sha256:1ca2b7cdbfdcc6a2e8fa75a09594916b50ec8260913ca48334dc3ce797179b5f"},
+    {file = "faiss_cpu-1.7.3-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:7b3f91856c19cfb8464178bab7e8ea94a391f6947b556be6754f9fc10b3c25fb"},
+    {file = "faiss_cpu-1.7.3-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:7a238a0ef4d36c614d6f60e1ea308288b3920091638a3687f708de6071d007c1"},
+    {file = "faiss_cpu-1.7.3-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:af53bee502c629eaaaf8b5ec648484a726be0fd2768ad4ef2bd4b829384b2682"},
+    {file = "faiss_cpu-1.7.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:441d1c305595d925138f2cde63dabe8c10ee05fc8ad66bf750e278a7e8c409bd"},
+    {file = "faiss_cpu-1.7.3-cp38-cp38-win_amd64.whl", hash = "sha256:2766cc14b9004c1aae3b3943e693c3a9566eb1a25168b681981f9048276fe1e7"},
+    {file = "faiss_cpu-1.7.3-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:20ef191bb6164c8e794b11d20427568a75d15980b6d66732071e9aa57ea06e2d"},
+    {file = "faiss_cpu-1.7.3-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:c57c293c4682066955626c2a2956be9a3b92594f69ed1a33abd72260a6911b69"},
+    {file = "faiss_cpu-1.7.3-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bd128170446ff3c3e28d89e813d32cd04f17fa3025794778a01a0d81524275dc"},
+    {file = "faiss_cpu-1.7.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a14d832b5361ce9af21977eb1dcdebe23b9edcc12aad40316df7ca1bd86bc6b5"},
+    {file = "faiss_cpu-1.7.3-cp39-cp39-win_amd64.whl", hash = "sha256:52df8895c5e59d1c9eda368a63790381a6f7fceddb22bed08f9c90a706d8a148"},
 ]
 frozenlist = [
     {file = "frozenlist-1.3.3-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:ff8bf625fe85e119553b5383ba0fb6aa3d0ec2ae980295aaefa552374926b3f4"},
@@ -961,9 +991,37 @@ pygtrie = [
     {file = "pygtrie-2.5.0-py3-none-any.whl", hash = "sha256:8795cda8105493d5ae159a5bef313ff13156c5d4d72feddefacaad59f8c8ce16"},
     {file = "pygtrie-2.5.0.tar.gz", hash = "sha256:203514ad826eb403dab1d2e2ddd034e0d1534bbe4dbe0213bb0593f66beba4e2"},
 ]
-pypdf2 = [
-    {file = "PyPDF2-3.0.1.tar.gz", hash = "sha256:a74408f69ba6271f71b9352ef4ed03dc53a31aa404d29b5d31f53bfecfee1440"},
-    {file = "pypdf2-3.0.1-py3-none-any.whl", hash = "sha256:d16e4205cfee272fbdc0568b68d82be796540b1537508cef59388f839c191928"},
+pymupdf = [
+    {file = "PyMuPDF-1.21.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:e334e7baea701d4029faa034520c722c9c55e8315b7ccf4d1b686eba8e293f32"},
+    {file = "PyMuPDF-1.21.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:19fe49966f3a072a258cdfbab3d8c5b11cb7c2fb7c8e6abf3398d9e55af6f1ca"},
+    {file = "PyMuPDF-1.21.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:36181c4cb27740791d611d0224dd18ac78e23a1f06aa2151394c5b9194b4f885"},
+    {file = "PyMuPDF-1.21.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e5273ff0c3bf08428ef956c4a5e5e0b475667cc3e1cb7b41d9f5131636996e59"},
+    {file = "PyMuPDF-1.21.1-cp310-cp310-win32.whl", hash = "sha256:7e5a1ed49df5eee7834fb37adb5c94354e98b23fa997e67034b157790a31bbfc"},
+    {file = "PyMuPDF-1.21.1-cp310-cp310-win_amd64.whl", hash = "sha256:c040c9ac98b7a1afc06fe55ffedbf6a305c24bf1c97597838f208c68035971f4"},
+    {file = "PyMuPDF-1.21.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:ac2f61632bcd4c9532a26b52684ca05a4c8b7b96d6be947134b3e01a420904fd"},
+    {file = "PyMuPDF-1.21.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:eb29cbfd34d5ef99c657539c4f48953ea15f4b1e4e162b48efcffa5c4101ce1d"},
+    {file = "PyMuPDF-1.21.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:06860a8e60ba14f25aac5db90803d59b1a2fdac24c2b65dc6f9876ff36df586e"},
+    {file = "PyMuPDF-1.21.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ff7d01cb563c3ca18880ba6a2661351f07b8a54f6599272be2e3568524e5e721"},
+    {file = "PyMuPDF-1.21.1-cp311-cp311-win32.whl", hash = "sha256:1fc4c8aee186326b3f138be8a4ac16a343e76c8ec45b5afab2d105a5e3b02d80"},
+    {file = "PyMuPDF-1.21.1-cp311-cp311-win_amd64.whl", hash = "sha256:dab0459791175dea813e6130e08b9026d3b9d66854f0dbb7ab51ab1619875d24"},
+    {file = "PyMuPDF-1.21.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:2a870f02b2767e9371bbb3d0263c3994f59679a64b1b9dd1a6b0d9a15c963d68"},
+    {file = "PyMuPDF-1.21.1-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f99e6c2109c38c17cd5f1b82c9d35f1e815a71a3464b765f41f3c8cf875dcf4c"},
+    {file = "PyMuPDF-1.21.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bf204723782ca481cd120e1ab124b0d59fd387103e15675ae462415bfa22b3a2"},
+    {file = "PyMuPDF-1.21.1-cp37-cp37m-win32.whl", hash = "sha256:b2b197bb0f00159f4584f51c7bf4d897aa5fb88de3c1f964347047a710c1f1be"},
+    {file = "PyMuPDF-1.21.1-cp37-cp37m-win_amd64.whl", hash = "sha256:dddd3fe6fa20b3e2642c10e66c97cfd3727010d3dafe653f16dce52396ef0208"},
+    {file = "PyMuPDF-1.21.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:c09cbc7924ddf99452bb0d70438d64753815d75526d6d94293249f1665691d84"},
+    {file = "PyMuPDF-1.21.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:fdba6bf77d1d3cd57ea93181c494f4b138523000ff74b25c523be7dce0058ac9"},
+    {file = "PyMuPDF-1.21.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:0b08b6afbb656f0e4582a8ee44c2ce0ab6235bb81830ec92d79f6e4893db639c"},
+    {file = "PyMuPDF-1.21.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0c85efbc08c83c8d91ae1cc7bb7e06c7cd7e203e9d0ed806ff22db173999f30c"},
+    {file = "PyMuPDF-1.21.1-cp38-cp38-win32.whl", hash = "sha256:fa0334247549def667d9f5358e558ec93815c78cebdb927a81dda38d681bf550"},
+    {file = "PyMuPDF-1.21.1-cp38-cp38-win_amd64.whl", hash = "sha256:d85c360abd72c14e302a2cefd02ebd01568f5c669700c7fc1ed056e9cdf3c285"},
+    {file = "PyMuPDF-1.21.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:f3ffa9a8c643da39aba80e787d2c1771d5be07b0e15bf193ddd1fda888bbca88"},
+    {file = "PyMuPDF-1.21.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:18fbdcb35c144b26a3a507bfa73f98401a27819f29dca496eb470b9a1ec09fad"},
+    {file = "PyMuPDF-1.21.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2bb5f9ce33054ebfbf63c41e68606d51e3ad5d85def0af5ebb6f0dd276e61037"},
+    {file = "PyMuPDF-1.21.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2fbb96336c5cc065f6e5359f034a689e4d64ca7697dc5965b03f105b2ecb7ba1"},
+    {file = "PyMuPDF-1.21.1-cp39-cp39-win32.whl", hash = "sha256:909afad284c24f25a831b37e433e444dc4cb5b3e38b3f761b1e4acad5c65327d"},
+    {file = "PyMuPDF-1.21.1-cp39-cp39-win_amd64.whl", hash = "sha256:069ba56c28cb9b603d016c63f23a21bf22a00c5b2a92286bf3dd6a2759e119d4"},
+    {file = "PyMuPDF-1.21.1.tar.gz", hash = "sha256:f815741a435c62a0036bbcbf5fa6c533567bd69c5338d413714fc57b22db93e0"},
 ]
 python-dotenv = [
     {file = "python-dotenv-1.0.0.tar.gz", hash = "sha256:a8df96034aae6d2d50a4ebe8216326c61c3eb64836776504fcca410e5937a3ba"},
