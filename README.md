@@ -18,7 +18,6 @@
 
 # 效果
 
-![Alt](./img/img1.jpg)
 ![Alt](./img/img2.jpg)
 
 # 安装
