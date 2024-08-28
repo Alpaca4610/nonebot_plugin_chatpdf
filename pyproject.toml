@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-chatpdf"
-version = "0.4.0"
+version = "1.0.0"
 description = "A nonebot plugin for chatpdf"
 authors = ["Alpaca <alpaca@bupt.edu.cn>"]
 license = "MIT"
@@ -10,8 +10,7 @@ readme = "README.md"
 python = "^3.8"
 nonebot2 = "^2.0.0rc3"
 nonebot-adapter-onebot = "^2.2.1"
-openai = "^0.27.1"
-aiohttp = "^3.8.4"
+openai = "^1.30.1"
 numpy = "^1.24.2"
 faiss-cpu = "^1.7.3"
 pymupdf = "^1.21.1"

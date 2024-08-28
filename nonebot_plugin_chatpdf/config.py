@@ -3,9 +3,9 @@ from typing import Optional
 
 
 class Config(BaseModel, extra=Extra.ignore):
-    openai_api_key: Optional[str] = ""
-    openai_model_name: Optional[str] = "gpt-3.5-turbo"
-    openai_http_proxy: Optional[str] = None
+    oneapi_url: Optional[str] = ""
+    oneapi_key: Optional[str] = ""
+    oneapi_model: Optional[str] = "gpt-4o"
 
 
 class ConfigError(Exception):
